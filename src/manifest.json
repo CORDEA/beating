@@ -3,16 +3,13 @@
   "version": "0.0.1",
   "description": "",
   "background": {
-    "scripts": [
-      "dist/background.bundle.js"
-    ],
-    "persistent": false
+    "service_worker": "background.bundle.js"
   },
   "options_page": "options.html",
   "permissions": [
     "tabs",
-    "storage",
-    "<all_urls>"
+    "storage"
   ],
-  "manifest_version": 2
+  "host_permissions": [],
+  "manifest_version": 3
 }
