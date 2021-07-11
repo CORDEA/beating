@@ -1,0 +1,8 @@
+{
+  "name": "beating",
+  "version": "1.0.0",
+  "repository": "https://github.com/CORDEA/beating",
+  "author": "Yoshihiro Tanaka",
+  "license": "Apache-2.0",
+  "private": true
+}
