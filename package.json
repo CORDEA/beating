@@ -21,6 +21,7 @@
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
+    "@material/list": "^11.0.0",
     "@material/slider": "^11.0.0",
     "@material/textfield": "^11.0.0",
     "@types/chrome": "^0.0.146",
