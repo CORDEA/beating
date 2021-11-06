@@ -3,6 +3,8 @@
     <TextField hint="Url" :value.sync="url"/>
     <Slider :value.sync="volume"/>
     <Button @click="onSubmit"/>
+
+    <List :items="items"/>
   </div>
 </template>
 
@@ -11,9 +13,12 @@ import {KEY} from './constants';
 import TextField from './TextField.vue';
 import Slider from './Slider.vue';
 import Button from './Button.vue';
+import List from './List.vue';
+import {PageVolume} from './PageVolume';
 
 export default {
   components: {
+    List,
     Slider,
     TextField,
     Button,
@@ -22,6 +27,7 @@ export default {
     return {
       url: '',
       volume: 0,
+      items: [] as Array<PageVolume>,
     };
   },
   methods: {
@@ -38,9 +44,21 @@ export default {
         values.push(value)
         object[KEY] = values;
         chrome.storage.local.set(object, function () {
+          this.updateItems(object);
         });
       });
+    },
+    updateItems: function (map: any) {
+      this.items = (map[KEY] ?? []).map((v: any) => {
+        return {
+          url: v['url'],
+          volume: v['volume'],
+        };
+      });
     }
+  },
+  mounted() {
+    chrome.storage.local.get([KEY], this.updateItems);
   },
 }
 </script>

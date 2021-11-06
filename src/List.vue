@@ -1,10 +1,10 @@
 <template>
   <ul class="mdc-list mdc-list--two-line">
-    <li class="mdc-list-item">
+    <li class="mdc-list-item" v-for="(item) in items">
       <span class="mdc-list-item__ripple"></span>
       <span class="mdc-list-item__text">
-      <span class="mdc-list-item__primary-text">{{ title }}</span>
-      <span class="mdc-list-item__secondary-text">{{ description }}</span>
+      <span class="mdc-list-item__primary-text">{{ item.url }}</span>
+      <span class="mdc-list-item__secondary-text">{{ item.volume }}</span>
     </span>
     </li>
   </ul>
@@ -12,17 +12,14 @@
 
 <script lang="ts">
 import {MDCList} from '@material/list';
+import {PageVolume} from './PageVolume';
 
 export default {
-  name: "List",
+  name: 'List',
   props: {
-    title: {
-      type: String,
-      default: "",
-    },
-    description: {
-      type: String,
-      default: "",
+    items: {
+      type: Array as () => Array<PageVolume>,
+      default: [],
     },
   },
   mounted() {
