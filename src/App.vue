@@ -86,6 +86,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: end;
+  gap: 16px;
 }
 
 .button__submit {
