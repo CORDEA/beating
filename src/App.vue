@@ -7,11 +7,10 @@
 </template>
 
 <script lang="ts">
+import {KEY} from './constants';
 import TextField from './TextField.vue';
-import Slider from "./Slider.vue";
-import Button from "./Button.vue";
-
-const key = 'BEATING_VALUES';
+import Slider from './Slider.vue';
+import Button from './Button.vue';
 
 export default {
   components: {
@@ -29,15 +28,15 @@ export default {
     onSubmit: function () {
       const url = this.url;
       const volume = this.volume;
-      chrome.storage.local.get([key], function (map) {
+      chrome.storage.local.get([KEY], function (map) {
         const value = {
           'url': url,
           'volume': volume,
         };
         const object: { [key: string]: any } = {};
-        const values = map[key] ?? [];
+        const values = map[KEY] ?? [];
         values.push(value)
-        object[key] = values;
+        object[KEY] = values;
         chrome.storage.local.set(object, function () {
         });
       });

@@ -1,3 +1,5 @@
+import {KEY} from './constants';
+
 class UrlHandler {
   private url = ''
 
@@ -6,7 +8,9 @@ class UrlHandler {
       return;
     }
     this.url = url;
-    console.log(url);
+    chrome.storage.local.get(KEY, function (map) {
+      console.log(url);
+    });
   }
 }
 
