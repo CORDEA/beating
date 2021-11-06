@@ -3,7 +3,7 @@
     <TextField hint="Url" :value.sync="url"/>
     <Slider :value.sync="volume" class="slider__volume"/>
     <div class="button__submit-container">
-      <Button @click="onSubmit" class="button__submit"/>
+      <Button @click="onSubmit" label="Submit" class="button__submit"/>
     </div>
 
     <List :items="items" class="list__pages"/>
