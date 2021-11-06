@@ -4,6 +4,7 @@
     <Slider :value.sync="volume" class="slider__volume"/>
     <div class="button__submit-container">
       <Button @click="onSubmit" label="Submit" class="button__submit"/>
+      <Button @click="onClear" label="Clear" class="button__clear"/>
     </div>
 
     <List :items="items" class="list__pages"/>
@@ -36,6 +37,7 @@ export default {
     onSubmit: function () {
       const url = this.url;
       const volume = this.volume;
+      const self = this;
       chrome.storage.local.get([KEY], function (map) {
         const value = {
           'url': url,
@@ -46,12 +48,18 @@ export default {
         values.push(value)
         object[KEY] = values;
         chrome.storage.local.set(object, function () {
-          this.updateItems(object);
+          self.updateItems(object);
         });
       });
     },
-    updateItems: function (map: any) {
-      this.items = (map[KEY] ?? []).map((v: any) => {
+    onClear: function () {
+      const self = this;
+      chrome.storage.local.remove(KEY, function () {
+        self.updateItems();
+      });
+    },
+    updateItems: function (map: any | null = null) {
+      this.items = (map?.[KEY] ?? []).map((v: any) => {
         return {
           url: v['url'],
           volume: v['volume'],
