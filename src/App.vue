@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <TextField hint="Url" :value.sync="url"/>
-    <Slider :value.sync="volume"/>
-    <Button @click="onSubmit"/>
+    <Slider :value.sync="volume" class="slider__volume"/>
+    <div class="button__submit-container">
+      <Button @click="onSubmit" class="button__submit"/>
+    </div>
 
-    <List :items="items"/>
+    <List :items="items" class="list__pages"/>
   </div>
 </template>
 
@@ -64,5 +66,24 @@ export default {
 </script>
 
 <style scoped lang="scss">
+#app {
+  padding: 16px;
+}
 
+.slider__volume {
+  padding: 32px 0;
+}
+
+.button__submit-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.button__submit {
+}
+
+.list__pages {
+  padding: 32px 0;
+}
 </style>
