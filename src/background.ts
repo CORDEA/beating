@@ -1,4 +1,3 @@
-import {KEY} from './constants';
 import Tab = chrome.tabs.Tab;
 
 class TabHandler {
@@ -13,12 +12,10 @@ class TabHandler {
       return;
     }
     this.tab = tab;
-    chrome.storage.local.get(KEY, async function (map) {
-      chrome.scripting.executeScript({
-        target: {tabId: tab.id},
-        files: ['content-script.bundle.js']
-      }, function () {
-      });
+    chrome.scripting.executeScript({
+      target: {tabId: tab.id},
+      files: ['content-script.bundle.js']
+    }, function () {
     });
   }
 }
