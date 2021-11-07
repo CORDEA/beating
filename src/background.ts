@@ -5,6 +5,10 @@ class TabHandler {
   private tab: Tab | null = null
 
   handle(tab: Tab) {
+    const url = tab.url;
+    if (!url.startsWith('http') && !url.startsWith('https')) {
+      return;
+    }
     if (this.tab == tab) {
       return;
     }
