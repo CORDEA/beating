@@ -1,30 +1,35 @@
 import {KEY} from './constants';
+import Tab = chrome.tabs.Tab;
 
-class UrlHandler {
-  private url = ''
+class TabHandler {
+  private tab: Tab | null = null
 
-  handle(url: string | undefined) {
-    if (!url || this.url == url) {
+  handle(tab: Tab) {
+    if (this.tab == tab) {
       return;
     }
-    this.url = url;
-    chrome.storage.local.get(KEY, function (map) {
-      console.log(url);
+    this.tab = tab;
+    chrome.storage.local.get(KEY, async function (map) {
+      chrome.scripting.executeScript({
+        target: {tabId: tab.id},
+        files: ['content-script.bundle.js']
+      }, function () {
+      });
     });
   }
 }
 
-const handler = new UrlHandler();
+const handler = new TabHandler();
 
 chrome.tabs.onActivated.addListener(async function (info) {
   const tab = await chrome.tabs.get(info.tabId);
   if (!tab.active) {
     return;
   }
-  handler.handle(tab.url);
+  handler.handle(tab);
 });
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-  handler.handle(tab.url);
+  handler.handle(tab);
 })
 

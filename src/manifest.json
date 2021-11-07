@@ -8,8 +8,12 @@
   "options_page": "options.html",
   "permissions": [
     "tabs",
-    "storage"
+    "activeTab",
+    "storage",
+    "scripting"
   ],
-  "host_permissions": [],
+  "host_permissions": [
+    "*://*/*"
+  ],
   "manifest_version": 3
 }
